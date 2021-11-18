@@ -1,0 +1,97 @@
+﻿@model MvcBookLend.Models.UserTable
+
+@{
+    ViewData["Title"] = "create";
+}
+
+<h1>create</h1>
+
+<h4>UserTable</h4>
+<hr />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Catergory" class="control-label"></label>
+                <select id="category" asp-items="@ViewBag.category" asp-for="Catergory">
+                    <option value="-1">Select Category</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bookname" class="control-label"></label>
+                <select id="book" asp-for="Bookname">
+                    <option>Select Book</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Returndate" class="control-label"></label>
+                <input id="date" asp-for="Returndate" class="form-control" />
+                <span asp-validation-for="Returndate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lendeddate" class="control-label"></label>
+                @Html.TextBox("Lendeddate", DateTime.Today, new { @readonly = "readonly" })
+                <span asp-validation-for="Returndate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" id="cost" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#category").on("change", function () {
+                $.ajax({
+                    type: "Get",
+                    url: "/User/Getbook",
+                    data: { "Cname": $("#category").val() },
+                    success: function (response) {
+                        var items = '';
+                        items = "<option value=''>Select Book</option>"
+                        $(response).each(function () {
+                            items += "<option value=" + this.text + ">" + this.text + "</option>";
+
+                        })
+                        $("#book").html(items);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            })
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#cost").val(DateTime($("#date"));
+        })
+            
+    </script>
+}

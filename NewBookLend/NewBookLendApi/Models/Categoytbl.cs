@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace NewBookLendApi.Models
+{
+    public partial class Categoytbl
+    {
+        public Categoytbl()
+        {
+            Booktbls = new HashSet<Booktbl>();
+        }
+
+        public int Id { get; set; }
+        public string Category { get; set; }
+
+        public virtual ICollection<Booktbl> Booktbls { get; set; }
+    }
+}
