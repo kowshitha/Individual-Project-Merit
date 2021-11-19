@@ -31,7 +31,7 @@ namespace NewBookLendApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserTable>> GetUserTable(int id)
         {
-            var userTable = await _context.UserTables.FindAsync(id);
+            var userTable =  _context.UserTables.Where(e=>e.Id==id).FirstOrDefault();
 
             if (userTable == null)
             {

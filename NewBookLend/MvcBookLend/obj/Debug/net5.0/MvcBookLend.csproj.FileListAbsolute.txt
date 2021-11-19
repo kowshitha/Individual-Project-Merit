@@ -149,3 +149,4 @@ C:\Users\merit\source\repos\NewBookLend\MvcBookLend\obj\Debug\net5.0\MvcBookLend
 C:\Users\merit\source\repos\NewBookLend\MvcBookLend\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\merit\source\repos\NewBookLend\MvcBookLend\obj\Debug\net5.0\Razor\Views\User\Create.cshtml.g.cs
 C:\Users\merit\source\repos\NewBookLend\MvcBookLend\obj\Debug\net5.0\Razor\Views\User\Index.cshtml.g.cs
+C:\Users\merit\source\repos\NewBookLend\MvcBookLend\obj\Debug\net5.0\Razor\Views\User\Welcome.cshtml.g.cs

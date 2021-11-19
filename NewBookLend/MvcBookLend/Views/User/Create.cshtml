@@ -2,66 +2,67 @@
 
 @{
     ViewData["Title"] = "create";
+    @*Layout= "~/Views/Shared/_Layout.cshtml";*@
 }
-
-<h1>create</h1>
-
-<h4>UserTable</h4>
-<hr />
+<link href="~/css/Book.css" rel="stylesheet" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Catergory" class="control-label"></label>
-                <select id="category" asp-items="@ViewBag.category" asp-for="Catergory">
-                    <option value="-1">Select Category</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bookname" class="control-label"></label>
-                <select id="book" asp-for="Bookname">
-                    <option>Select Book</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Returndate" class="control-label"></label>
-                <input id="date" asp-for="Returndate" class="form-control" />
-                <span asp-validation-for="Returndate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Lendeddate" class="control-label"></label>
-                @Html.TextBox("Lendeddate", DateTime.Today, new { @readonly = "readonly" })
-                <span asp-validation-for="Returndate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cost" class="control-label"></label>
-                <input asp-for="Cost" class="form-control" id="cost" />
-                <span asp-validation-for="Cost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<body class="body">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="container">
+        <div class="title">BOOK LENDING FORM</div>
+        <div class="content">
+            <form asp-action="Create">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Full Name</span>
+                        <input type="text" placeholder="Enter your name" asp-for="Name" id="name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Email</span>
+                        <input type="text" placeholder="Enter your email" asp-for="Email" id="email">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Category</span>
+                        <select id="category" asp-items="@ViewBag.category" asp-for="Catergory">
+                            <option value="-1">Select Category</option>
+                        </select>
+                        <span asp-validation-for="Catergory" class="text-danger"></span>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Book</span>
+                        <select id="book" asp-for="Bookname">
+                            <option>Select Book</option>
+                        </select>
+                        <span asp-validation-for="Bookname" class="text-danger"></span>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Return Date</span>
+                        <input id="returndate" asp-for="Returndate" onchange="date()" />
+                        <span asp-validation-for="Returndate" class="text-danger"></span>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Lended Date</span>
+                        @Html.TextBox("Lendeddate", DateTime.Now, new { id = "ldate", @readonly = "readonly" })
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Cost</span>
+                        <input type="text" placeholder="0" asp-for="Cost" id="cost" readonly="readonly">
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+                <input type="submit" value="Save" id="save" onclick="save()">
+        </div>
     </div>
-</div>
+</body>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script type="text/javascript">
         $(document).ready(function () {
             $("#category").on("change", function () {
@@ -88,10 +89,45 @@
             })
         });
     </script>
-    <script type="text/javascript">
-        $(function () {
-            $("#cost").val(DateTime($("#date"));
-        })
+    <script language="JavaScript" type="text/javascript">
+        function date() {
+            var returndate = document.getElementById("returndate").value
+            var lenddate = Date.parse(new Date());
+            var Time = new Date(returndate).getTime() - new Date(lenddate).getTime();
+            var Days = parseInt(Time / (1000 * 3600 * 24)) + 1;
+            console.log(Days);
+            console.log(returndate);
+            console.log(lenddate);
+
+            if (Days <= 1) {
+                var result = 0;
+
+                document.getElementById("cost").value = result;
+            }
+            else if (Days <= 5) {
+
+                var result = 100;
+                document.getElementById("cost").value = result;
+
+            }
+
+            else if (Days > 5) {
+
+                var rate = Days - 5;
+
+                var Rate = rate * 20;
+
+                var result = 100 + Rate;
+
+                document.getElementById("cost").value = result;
+
+            }
             
-    </script>
+        }
+        </script>
+<script>
+    function save() {
+        localStorage.setItem("name").value;
+    }
+</script>
 }

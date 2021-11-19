@@ -46,15 +46,24 @@ namespace MvcBookLend.Controllers
             return View();
 
         }
+        public ActionResult Welcome()
+        {
+            return View();
+
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create(UserTable user)
         {
+            var users = new UserTable();
+            var email = users.Email;
+            var rtdt = users.Returndate;
             HttpClient cli = _api.Initial();
             string authornew = JsonConvert.SerializeObject(user);
             StringContent content = new StringContent(authornew, Encoding.UTF8, "application/json");
             HttpResponseMessage response = cli.PostAsync(cli.BaseAddress + "api/UserTables", content).Result;
-            ViewBag.category = new SelectList(_context.Categoytbls, "Category", "Id");
+            ViewBag.category = new SelectList(_context.Categoytbls, "Category", "Category");
+            
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -62,6 +71,7 @@ namespace MvcBookLend.Controllers
             return View();
 
         }
+        
         [HttpGet]
 
         public JsonResult Getbook(string Cname)
