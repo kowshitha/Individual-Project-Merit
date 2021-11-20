@@ -1,0 +1,76 @@
+﻿@model IEnumerable<MvcbkLending.Models.UserTable>
+
+@{
+       Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="margin-left:550px;">USER REPORT</h1>
+
+
+<table class=" table-striped table-bordered table-hover" border="1" cellpadding="15" cellspacing="5" style="border-radius:40px; border:5px solid; margin-left:290px;width:500px;">
+    <thead style="border:5px solid">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookreqno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Catergory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookname)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Returndate.Date)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Lendeddate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody style="border:5px solid">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bookreqno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Catergory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bookname)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Returndate)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lendeddate)
+                </td>
+                @* <td>
+                        @Html.DisplayFor(modelItem => item.Bookreqno)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+</table>

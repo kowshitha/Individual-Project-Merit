@@ -1,0 +1,146 @@
+﻿@model MvcbkLending.Models.UserTable
+
+@{
+    ViewData["Title"] = "create";
+    @*Layout= "~/Views/Shared/_Layout.cshtml";*@
+}
+<link href="~/css/Book.css" rel="stylesheet" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <body class="body">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="container">
+            <div class="title">BOOK LENDING FORM</div>
+            <div class="content">
+                    <form asp-action="Create" id="userform">
+                        <div class="user-details">
+                            <div class="input-box">
+                                <span class="details">Full Name</span>
+                                <input type="text" placeholder="Enter your name" asp-for="Name" id="name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Email</span>
+                                @*@Html.TextBoxFor(e => e.Email, new { id = "email" })*@
+                                <input type="text" placeholder="Enter your email" asp-for="Email" id="email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Category</span>
+                                <select id="category" asp-items="@ViewBag.category" asp-for="Catergory">
+                                    <option  selected disabled>Select Category</option>
+                                </select>
+                                <span asp-validation-for="Catergory" class="text-danger"></span>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Book Name</span>
+                                <select id="book" asp-for="Bookname">
+                                    <option disabled>Select Book</option>
+                                </select>
+                                <span asp-validation-for="Bookname" class="text-danger"></span>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Return Date</span>
+                                <input id="returndate" asp-for="Returndate" onchange="date()" />
+                                <span asp-validation-for="Returndate" class="text-danger"></span>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Lended Date</span>
+                                @Html.TextBox("Lendeddate", DateTime.Now, new { id = "ldate", @readonly = "readonly" })
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Cost</span>
+                                <input type="text" placeholder="0" asp-for="Cost" id="cost" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="button">
+                            <input type="submit" value="Submit" onclick="clearall()">
+                        </div>
+                    </form>
+                    <input type="submit" value="Save" id="save" onclick="save()">
+                </div>
+        </div>
+    </body>
+
+
+    @section Scripts{
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#category").on("change", function () {
+                    $.ajax({
+                        type: "Get",
+                        url: "/User/Getbook",
+                        data: { "Cname": $("#category").val() },
+                        success: function (response) {
+                            var items = '';
+                            $(response).each(function () {
+                                items += "<option value=" + this.text + ">" + this.text + "</option>";
+
+                            })
+                            $("#book").html(items);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                })
+            });
+        @*</script>
+        <script language="JavaScript" type="text/javascript">*@
+            function date() {
+                var returndate = document.getElementById("returndate").value
+                var lenddate = Date.parse(new Date());
+                var Time = new Date(returndate).getTime() - new Date(lenddate).getTime();
+                var Days = parseInt(Time / (1000 * 3600 * 24)) + 1;
+                if (Days <= 1) {
+                    var result = 0;
+                    document.getElementById("cost").value = result;
+                }
+                else if (Days <= 5) {
+                    var result = 100;
+                    document.getElementById("cost").value = result;
+                }
+                else if (Days > 5) {
+                    var rate = Days - 5;
+                    var Rate = rate * 20;
+                    var result = 100 + Rate;
+                    document.getElementById("cost").value = result;
+                }
+            }
+        @*</script>
+        <script>*@
+            function save() {
+                localStorage.setItem("uname", document.getElementById("name").value);
+                localStorage.setItem("uemail", document.getElementById("email").value);
+                localStorage.setItem("ucategory", document.getElementById("category").value);
+                localStorage.setItem("ubook", document.getElementById("book").value);
+                localStorage.setItem("urdate",document.getElementById("returndate").value);
+                localStorage.setItem("uldate", document.getElementById("ldate").value);
+                localStorage.setItem("ucost", document.getElementById("cost").value);
+            }
+    @*        </script>
+<script>*@
+            window.onload = function () {
+                var name = localStorage.getItem("uname");
+                var email = localStorage.getItem("uemail");
+                var categ = localStorage.getItem("ucategory");
+                var bookname = localStorage.getItem("ubook");
+                var rdate = localStorage.getItem("urdate");
+                var ldate = localStorage.getItem("uldate");
+                var cost = localStorage.getItem("ucost");
+                if (name !== null) document.getElementById("name").value = name;
+                if (email !== null) document.getElementById("email").value = email;
+                if (categ !== null) document.getElementById("category").value = categ;
+                if (bookname !== null) document.getElementById("book").value = bookname;
+                if (rdate !== null) document.getElementById("returndate").value = rdate;
+                if (ldate !== null) document.getElementById("ldate").value = ldate;
+                if (cost !== null) document.getElementById("cost").value = cost;  
+    }
+    function clearall() {
+        window.localStorage.clear();
+    }
+        </script>
+    }

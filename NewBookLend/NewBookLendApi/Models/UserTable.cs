@@ -14,7 +14,7 @@ namespace NewBookLendApi.Models
         public string Bookname { get; set; }
         public DateTime Returndate { get; set; }
         public DateTime? Lendeddate { get; set; }
-        public string Bookreqno { get; set; }
         public int? Cost { get; set; }
+        public string Bookreqno { get; set; }
     }
 }

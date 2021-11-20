@@ -33,7 +33,7 @@ namespace NewBookLendApi
 .AddNewtonsoftJson(
 options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NewBookLendApi", Version = "v1" });

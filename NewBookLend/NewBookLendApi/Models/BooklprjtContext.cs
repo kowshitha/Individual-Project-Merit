@@ -80,8 +80,11 @@ namespace NewBookLendApi.Models
                     .HasColumnName("bookname");
 
                 entity.Property(e => e.Bookreqno)
-                    .HasMaxLength(50)
-                    .HasColumnName("bookreqno");
+                    .IsRequired()
+                    .HasMaxLength(35)
+                    .IsUnicode(false)
+                    .HasColumnName("BOOKREQNO")
+                    .HasComputedColumnSql("(concat('BK-',datepart(year,getdate()),'-',datepart(month,getdate()),'-',right([id],(6))))", false);
 
                 entity.Property(e => e.Catergory)
                     .IsRequired()
