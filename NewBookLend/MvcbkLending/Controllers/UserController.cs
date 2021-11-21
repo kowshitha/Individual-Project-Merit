@@ -56,13 +56,11 @@ namespace MvcbkLending.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserTable user)
         {
-            
             HttpClient cli = _api.Initial();
             string authornew = JsonConvert.SerializeObject(user);
             StringContent content = new StringContent(authornew, Encoding.UTF8, "application/json");
             HttpResponseMessage response = cli.PostAsync(cli.BaseAddress + "api/UserTables", content).Result;
             ViewBag.category = new SelectList(_context.Categoytbls, "Category", "Category");
-
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -82,11 +80,10 @@ namespace MvcbkLending.Controllers
         }
         
         [HttpGet]
-
         public JsonResult Getbook(string Cname)
         {
             var book = _context.Booktbls.Where(e => e.Cname == Cname);
-            return Json(new SelectList(book, "BId", "Bookname"));
+            return Json(new SelectList(book, "Bookname", "Bookname"));
         }
         public async Task<ActionResult> Delete(int id)
         {
@@ -99,6 +96,26 @@ namespace MvcbkLending.Controllers
             return View();
 
 
+        }
+        [HttpGet]
+        public JsonResult checkUser(string mail)
+        {
+            var ckemail = _context.UserTables.Where(e => e.Email == mail).SingleOrDefault();
+            if(ckemail!= null)
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult getuserinfo(string mail)
+        {
+            List<UserTable> users = _context.UserTables.Where(e=>e.Email==mail).ToList<UserTable>();
+            return Json(new { data = users }, new Newtonsoft.Json.JsonSerializerSettings());
         }
     }
 }

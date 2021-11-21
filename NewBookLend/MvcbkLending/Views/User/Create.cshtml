@@ -45,7 +45,7 @@
                             </div>
                             <div class="input-box">
                                 <span class="details">Lended Date</span>
-                                @Html.TextBox("Lendeddate", DateTime.Now, new { id = "ldate", @readonly = "readonly" })
+                                @Html.TextBox("Lendeddate", DateTime.Today.ToShortDateString(), new { id = "ldate", @readonly = "readonly"})
                             </div>
                             <div class="input-box">
                                 <span class="details">Cost</span>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="button">
-                            <input type="submit" value="Submit" onclick="clearall()">
+                            <input type="submit" value="Submit" id="submit" onclick="clearall()">
                         </div>
                     </form>
                     <input type="submit" value="Save" id="save" onclick="save()">
@@ -110,8 +110,6 @@
                     document.getElementById("cost").value = result;
                 }
             }
-        @*</script>
-        <script>*@
             function save() {
                 localStorage.setItem("uname", document.getElementById("name").value);
                 localStorage.setItem("uemail", document.getElementById("email").value);
@@ -121,8 +119,6 @@
                 localStorage.setItem("uldate", document.getElementById("ldate").value);
                 localStorage.setItem("ucost", document.getElementById("cost").value);
             }
-    @*        </script>
-<script>*@
             window.onload = function () {
                 var name = localStorage.getItem("uname");
                 var email = localStorage.getItem("uemail");
@@ -141,6 +137,66 @@
     }
     function clearall() {
         window.localStorage.clear();
-    }
+            }
+            $(document).ready(function () {
+                $("#email").on("change", function () {
+                    $.ajax({
+                        type: "Get",
+                        url: "/User/checkUser",
+                        data: { "mail": $("#email").val() },
+                        success: function (data) {
+                            if (data == 1) {
+                                if (confirm('You cannot lend a book until your return date')) {
+                                    window.location.reload();
+                                }
+                               @* alert("You cannot lend a book until your return date");*@
+                                
+                                $('#email').css("border-color", "Red")
+                                $(document).ready(function () {
+                                    $.ajax({
+                                        type: "Get",
+                                        url: "/User/getuserinfo",
+                                        data: { "mail": $("#email").val() },
+                                        success: function (info) {
+                                            for (i in info.data) {
+                                                for (j in info.data[i]) {
+                                                    if (j == "Returndate") {
+                                                        var rdt = new Date(info.data[i][j]);
+                                                        var cdt = new Date();
+                                                      @*  console.log("rdt",rdt.getTime());
+                                                        console.log("cdt",cdt.getTime());*@
+                                                        if (rdt.getTime() >= cdt.getTime()) {
+                                                            $("#category").prop('disabled', true);
+                                                            $("#book").prop('disabled', true);
+                                                            $("#returndate").prop('disabled', true);
+                                                            $("#ldate").prop('disabled', true);
+                                                            $("#cost").prop('disabled', true);
+                                                            $("#submit").prop('disabled', true);
+                                                            $("#save").prop('disabled', true);
+
+                                                        }
+                                                        else {
+                                                            $("#category").prop('disabled', false);
+                                                            $("#book").prop('disabled', false);
+                                                            $("#returndate").prop('disabled', false);
+                                                            $("#ldate").prop('disabled', false);
+                                                            $("#cost").prop('disabled', false);
+                                                            $("#submit").prop('disabled', false);
+                                                            $("#save").prop('disabled', false);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                })
+              })
         </script>
     }

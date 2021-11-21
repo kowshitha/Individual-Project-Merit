@@ -1,43 +1,43 @@
 ﻿@model IEnumerable<MvcbkLending.Models.UserTable>
 
 @{
-       Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "Report";
 }
 
-<h1 style="margin-left:550px;">USER REPORT</h1>
+@*<h1 style="margin-left:550px; margin-top:50px;">USER REPORT</h1>*@
 
 
-<table class=" table-striped table-bordered table-hover" border="1" cellpadding="15" cellspacing="5" style="border-radius:40px; border:5px solid; margin-left:290px;width:500px;">
-    <thead style="border:5px solid">
+@*<table class=" table-striped table-bordered table-hover" border="1" cellpadding="15" cellspacing="5" style="border: 5px solid; margin-left: 200px; width: 1000px; margin-top: 100px; ">
+    <thead style="border:5px solid;">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Bookreqno)
+                BOOK REQUEST NO
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+               EMAIL
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Catergory)
+                CATEGORY
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Bookname)
+               BOOK NAME
             </th>
-            @*<th>
+            <th>
                     @Html.DisplayNameFor(model => model.Returndate.Date)
-                </th>*@
+                </th>
             <th>
-                @Html.DisplayNameFor(model => model.Lendeddate)
+               LENDED DATE
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cost)
+               COST
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody style="border:5px solid">
+    <tbody style="border:5px solid;">
         @foreach (var item in Model)
         {
-            <tr>
+            <tr style="border:5px solid;">
                 <td>
                     @Html.DisplayFor(modelItem => item.Bookreqno)
                 </td>
@@ -50,27 +50,74 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Bookname)
                 </td>
-                @*<td>
+                <td>
                         @Html.DisplayFor(modelItem => item.Returndate)
-                    </td>*@
+                    </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Lendeddate)
                 </td>
-                @* <td>
+                 <td>
                         @Html.DisplayFor(modelItem => item.Bookreqno)
-                    </td>*@
+                    </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Cost)
                 </td>
                 <td>
-                    @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-</table>
+</table>*@
+<link href="~/css/report.css" rel="stylesheet" />
+<body class="body">
+    <div class="content1">
+        <div class="payment">
+            <div class="title">
+                <h2>USER REPORT</h2>
+                <a href="@Url.Action("Welcome", "User")" class="btn">Back</a>
+            </div>
+            <table>
+                <tr>
+                    <th>
+                        BOOK REQUEST NO
+                    </th>
+                    <th>
+                        EMAIL
+                    </th>
+                    <th>
+                        CATEGORY
+                    </th>
+                    <th>
+                        BOOK NAME
+                    </th>
+                    <th>
+                        RETURN DATE
+                    </th>
+                    <th>
+                        LENDED DATE
+                    </th>
+                    <th>
+                        COST
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.Bookreqno)</td>
+                <td> @Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.Catergory)</td>
+                <td> @Html.DisplayFor(modelItem => item.Bookname)</td>
+                <td> @Html.DisplayFor(modelItem => item.Returndate)</td>
+                <td> @Html.DisplayFor(modelItem => item.Lendeddate)</td>
+                <td> @Html.DisplayFor(modelItem => item.Cost)</td>
+                <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+
+            </tr>
+                }
+            </table>
+        </div>
+    </div>
+</body>

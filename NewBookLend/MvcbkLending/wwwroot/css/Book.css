@@ -150,9 +150,26 @@ form .button{
     /* transform: scale(0.99); */
     background: linear-gradient(-135deg, #71b7e6, #9b59b6);
 }
-@media(max-width: 980px) {
+@media(max-width:1115px){
+    form .button input {
+        margin-left: 150px;
+    }
+    #save{
+        margin-left:150px;
+    }
+    }
+@media(max-width: 990px) {
     .container {
-        margin-right: 0px;
+        margin-right: 10px;
+    }
+    form .button input {
+        margin-left: 160px;
+        font-size:15px;
+    }
+
+    #save {
+        margin-left: 160px;
+        font-size: 15px;
     }
 }
 
@@ -183,5 +200,14 @@ form .button{
 @media(max-width: 459px) {
     .container .content .category {
         flex-direction: column;
+    }
+    form .button input {
+        margin-left: 60px;
+        font-size: 15px;
+    }
+
+    #save {
+        margin-left: 60px;
+        font-size: 15px;
     }
 }
