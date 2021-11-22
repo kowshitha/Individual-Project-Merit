@@ -1,4 +1,4 @@
-﻿
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 .homebanner {
     width: 100%;
@@ -63,6 +63,7 @@
         margin: 20px auto;
         font-weight: 100;
         line-height: 25px;
+        font-size:25px;
     }
 
 .homebutton {

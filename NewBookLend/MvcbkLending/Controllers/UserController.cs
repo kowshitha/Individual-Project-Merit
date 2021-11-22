@@ -66,17 +66,6 @@ namespace MvcbkLending.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-
-
-        }
-        public ActionResult condition()
-        {
-            var user = _context.UserTables;
-            foreach(UserTable u in user)
-            {
-                var email = u.Email;
-            }
-            return View();
         }
         
         [HttpGet]
@@ -100,7 +89,7 @@ namespace MvcbkLending.Controllers
         [HttpGet]
         public JsonResult checkUser(string mail)
         {
-            var ckemail = _context.UserTables.Where(e => e.Email == mail).SingleOrDefault();
+            var ckemail = _context.UserTables.Where(e => e.Email == mail).FirstOrDefault();
             if(ckemail!= null)
             {
                 return Json(1);

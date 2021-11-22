@@ -88,8 +88,6 @@
                     });
                 })
             });
-        @*</script>
-        <script language="JavaScript" type="text/javascript">*@
             function date() {
                 var returndate = document.getElementById("returndate").value
                 var lenddate = Date.parse(new Date());
@@ -146,11 +144,6 @@
                         data: { "mail": $("#email").val() },
                         success: function (data) {
                             if (data == 1) {
-                                if (confirm('You cannot lend a book until your return date')) {
-                                    window.location.reload();
-                                }
-                               @* alert("You cannot lend a book until your return date");*@
-                                
                                 $('#email').css("border-color", "Red")
                                 $(document).ready(function () {
                                     $.ajax({
@@ -162,20 +155,19 @@
                                                 for (j in info.data[i]) {
                                                     if (j == "Returndate") {
                                                         var rdt = new Date(info.data[i][j]);
+                                                        @*var gdt = new Date(info.data[i][j]).getDate() + 1;*@
                                                         var cdt = new Date();
-                                                      @*  console.log("rdt",rdt.getTime());
-                                                        console.log("cdt",cdt.getTime());*@
+                                                        console.log("rdt", rdt.getTime());
+                                                        console.log("cdt", cdt.getTime());
                                                         if (rdt.getTime() >= cdt.getTime()) {
-                                                            $("#category").prop('disabled', true);
-                                                            $("#book").prop('disabled', true);
-                                                            $("#returndate").prop('disabled', true);
-                                                            $("#ldate").prop('disabled', true);
-                                                            $("#cost").prop('disabled', true);
-                                                            $("#submit").prop('disabled', true);
-                                                            $("#save").prop('disabled', true);
-
+                                                            confirm('You can lend another book only after your return date')
+                                                            window.location.reload();
                                                         }
-                                                        else {
+                                                        else if (rdt.getDate() == cdt.getDate()) {
+                                                            confirm('You can lend another book only after your return date')
+                                                            window.location.reload();
+                                                        }
+                                                       @* else {
                                                             $("#category").prop('disabled', false);
                                                             $("#book").prop('disabled', false);
                                                             $("#returndate").prop('disabled', false);
@@ -183,7 +175,7 @@
                                                             $("#cost").prop('disabled', false);
                                                             $("#submit").prop('disabled', false);
                                                             $("#save").prop('disabled', false);
-                                                        }
+                                                        }*@
                                                     }
                                                 }
                                             }

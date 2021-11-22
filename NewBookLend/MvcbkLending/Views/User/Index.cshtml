@@ -3,74 +3,6 @@
 @{
     ViewData["title"] = "Report";
 }
-
-@*<h1 style="margin-left:550px; margin-top:50px;">USER REPORT</h1>*@
-
-
-@*<table class=" table-striped table-bordered table-hover" border="1" cellpadding="15" cellspacing="5" style="border: 5px solid; margin-left: 200px; width: 1000px; margin-top: 100px; ">
-    <thead style="border:5px solid;">
-        <tr>
-            <th>
-                BOOK REQUEST NO
-            </th>
-            <th>
-               EMAIL
-            </th>
-            <th>
-                CATEGORY
-            </th>
-            <th>
-               BOOK NAME
-            </th>
-            <th>
-                    @Html.DisplayNameFor(model => model.Returndate.Date)
-                </th>
-            <th>
-               LENDED DATE
-            </th>
-            <th>
-               COST
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody style="border:5px solid;">
-        @foreach (var item in Model)
-        {
-            <tr style="border:5px solid;">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bookreqno)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Catergory)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bookname)
-                </td>
-                <td>
-                        @Html.DisplayFor(modelItem => item.Returndate)
-                    </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lendeddate)
-                </td>
-                 <td>
-                        @Html.DisplayFor(modelItem => item.Bookreqno)
-                    </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cost)
-                </td>
-                <td>
-                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>*@
 <link href="~/css/report.css" rel="stylesheet" />
 <body class="body">
     <div class="content1">
@@ -85,7 +17,7 @@
                         BOOK REQUEST NO
                     </th>
                     <th>
-                        EMAIL
+                        NAME
                     </th>
                     <th>
                         CATEGORY
@@ -106,13 +38,13 @@
                 @foreach (var item in Model)
                 {
             <tr>
-                <td> @Html.DisplayFor(modelItem => item.Bookreqno)</td>
-                <td> @Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.Bookreqno)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.Catergory)</td>
-                <td> @Html.DisplayFor(modelItem => item.Bookname)</td>
-                <td> @Html.DisplayFor(modelItem => item.Returndate)</td>
-                <td> @Html.DisplayFor(modelItem => item.Lendeddate)</td>
-                <td> @Html.DisplayFor(modelItem => item.Cost)</td>
+                <td>@Html.DisplayFor(modelItem => item.Bookname)</td>
+                <td>@Html.DisplayFor(modelItem => item.Returndate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Lendeddate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Cost)</td>
                 <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
 
             </tr>
