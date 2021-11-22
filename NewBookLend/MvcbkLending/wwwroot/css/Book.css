@@ -8,25 +8,30 @@
 }
 
 .body {
-    height: 100vh;
+    /*height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background-image: url('../lib/Image/booklend.jpg');
-    background-size: cover;
+    background-image: url('../lib/Image/store.jpg');
+    background-size:cover;*/
+    background: url('../lib/Image/store.jpg');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 40%;
+    height: 90vh;
 }
 
 .container {
     max-width: 700px;
     width: 100%;
-    background-color: rgba(255, 255, 255,0.4);
+    background-color: antiquewhite;
     /* opacity: 0.9; */
     padding: 25px 30px;
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.15);
     margin-right: 600px;
-    margin-top:5px;
+    margin-top: 20px;
     position: relative;
 }
 
@@ -44,7 +49,7 @@
             height: 3px;
             width: 230px;
             border-radius: 5px;
-            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            background: linear-gradient(135deg, #d53369, #cbab6b);
         }
 
 .content form .user-details {
@@ -80,8 +85,8 @@ form .input-box span.details {
 }
 
     .user-details .input-box input:focus,
-    .user-details .input-box input:valid {
-        border-color: #9b59b6;
+    .user-details .input-box input,select:valid {
+        border-color:#d53369;
     }
 
 form .gender-details .gender-title {
@@ -109,53 +114,53 @@ form .button{
 #save{
     height: 45px;
 }
-    form .button input{
-        height: 100%;
-        width: 30%;
-        border-radius: 40px;
-        border: none;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 500;
-        letter-spacing: 1px;
-        cursor: pointer;
-        margin-left: 250px;
-        transition: all 0.3s ease;
-        background: linear-gradient(135deg, #71b7e6, #9b59b6);
-        box-shadow: 0 3px 10px rgb(0 0 0 / 50%);
-    }
-#save{
-        width: 30%;
-        border-radius: 40px;
-        border: none;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 500;
-        letter-spacing: 1px;
-        cursor: pointer;
-        margin-left: 250px;
-        transition: all 0.3s ease;
-        background: linear-gradient(135deg, #71b7e6, #9b59b6);
-        box-shadow: 0 3px 10px rgb(0 0 0 / 50%);
-    }
+form .button input {
+    height: 100%;
+    width: 30%;
+    border-radius: 40px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-left: 230px;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #d53369, #cbab6b);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 50%);
+}
+#save {
+    width: 30%;
+    border-radius: 40px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-left: 230px;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #d53369, #cbab6b);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 50%);
+}
         /* #sub{
      margin-left: 300px;
      margin-bottom: 400px;
  } */
-        form .button input:hover {
-            /* transform: scale(0.99); */
-            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
-        }
+form .button input:hover {
+    /* transform: scale(0.99); */
+    background: linear-gradient(-135deg, #d53369, #cbab6b);
+}
 #save:hover {
     /* transform: scale(0.99); */
-    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+    background: linear-gradient(-135deg, #d53369, #cbab6b);
 }
 @media(max-width:1115px){
     form .button input {
-        margin-left: 150px;
+        margin-left: 220px;
     }
     #save{
-        margin-left:150px;
+        margin-left:220px;
     }
     }
 @media(max-width: 990px) {
@@ -163,12 +168,12 @@ form .button{
         margin-right: 10px;
     }
     form .button input {
-        margin-left: 160px;
+        margin-left: 240px;
         font-size:15px;
     }
 
     #save {
-        margin-left: 160px;
+        margin-left: 240px;
         font-size: 15px;
     }
 }
@@ -197,17 +202,17 @@ form .button{
     }
 }
 
-@media(max-width: 459px) {
+@media(max-width: 550px) {
     .container .content .category {
         flex-direction: column;
     }
     form .button input {
-        margin-left: 60px;
+        margin-left: 100px;
         font-size: 15px;
     }
 
     #save {
-        margin-left: 60px;
+        margin-left: 100px;
         font-size: 15px;
     }
 }

@@ -1,6 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 .body {
-    background-image: url('../lib/Image/6714.jpg')
+   /* background-image: url('../lib/Image/6714.jpg')*/
+   background-color:antiquewhite;
 }
 
 .content1 {
@@ -17,20 +18,23 @@
     border-radius: 10px;
     min-height: 50vh;
     flex: 5;
-    background:whitesmoke;
+    background: whitesmoke;
     margin: 0 25px 25px 25px;
     display: flex;
     flex-direction: column;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, -1px 10px 17px 9px rgba(0,0,0,0.16);
+    box-shadow: 0px 10px 13px -7px #000000, -1px 10px 17px 9px rgba(0,0,0,0.16);
 }
 
-    .payment:hover {
+    /*.payment:hover {
         border-radius: 10px;
         -webkit-box-shadow: 0px 10px 13px -7px #000000, -1px 10px 17px 9px rgba(0,0,0,0.16);
         box-shadow: 0px 10px 13px -7px #000000, -1px 10px 17px 9px rgba(0,0,0,0.16);
-    }
+    }*/
 
 table {
     padding: 10px;
+    background-color:whitesmoke;
 }
 
 th, td {
@@ -39,16 +43,17 @@ th, td {
     color:black;
 }
 .btn {
-    background-color: #004680;
-    color: white;
+    background: floralwhite;
+    color: black;
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
     border-radius: 20px;
-    width: 100px;
+    width: 90px;
     height: 35px;
     padding: 5px 6px;
-    margin-left:100px;
+    margin-left: 100px;
+    border-color: black;
 }
 
     .btn:hover {
@@ -59,12 +64,14 @@ th, td {
     }
 
 .title {
-    color: royalblue;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     padding: 15px 10px;
     border-bottom: 2px solid #999;
+    background-color: indianred;
+    border-radius: 2px
 }
 
     .title h2 {

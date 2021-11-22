@@ -106,6 +106,12 @@ namespace MvcbkLending.Controllers
             List<UserTable> users = _context.UserTables.Where(e=>e.Email==mail).ToList<UserTable>();
             return Json(new { data = users }, new Newtonsoft.Json.JsonSerializerSettings());
         }
+
+        public JsonResult getreport()
+        {
+            List<UserTable> users = _context.UserTables.ToList<UserTable>();
+            return Json(new { data = users }, new Newtonsoft.Json.JsonSerializerSettings());
+        }
     }
 }
 

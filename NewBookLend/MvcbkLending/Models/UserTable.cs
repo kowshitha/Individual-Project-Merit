@@ -19,6 +19,7 @@ namespace MvcbkLending.Models
         [Required(ErrorMessage = "Choose Book")]
         public string Bookname { get; set; }
         [DataType(DataType.Date)]
+        [Required(ErrorMessage ="Select return date")]
         public DateTime Returndate { get; set; }
         [DataType(DataType.Date)]
         public DateTime? Lendeddate { get; set; }

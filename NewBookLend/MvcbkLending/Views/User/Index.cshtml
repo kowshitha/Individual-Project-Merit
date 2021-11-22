@@ -9,9 +9,10 @@
         <div class="payment">
             <div class="title">
                 <h2>USER REPORT</h2>
+               @* <input type="date" />*@
                 <a href="@Url.Action("Welcome", "User")" class="btn">Back</a>
             </div>
-            <table>
+            <table id="TableId" >
                 <tr>
                     <th>
                         BOOK REQUEST NO
@@ -26,10 +27,10 @@
                         BOOK NAME
                     </th>
                     <th>
-                        RETURN DATE
+                        LENDED DATE
                     </th>
                     <th>
-                        LENDED DATE
+                        RETURN DATE
                     </th>
                     <th>
                         COST
@@ -37,19 +38,39 @@
                 </tr>
                 @foreach (var item in Model)
                 {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Bookreqno)</td>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Catergory)</td>
-                <td>@Html.DisplayFor(modelItem => item.Bookname)</td>
-                <td>@Html.DisplayFor(modelItem => item.Returndate)</td>
-                <td>@Html.DisplayFor(modelItem => item.Lendeddate)</td>
-                <td>@Html.DisplayFor(modelItem => item.Cost)</td>
-                <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Bookreqno)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Catergory)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Bookname)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Lendeddate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Returndate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Cost)</td>
+                        <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
 
-            </tr>
+                    </tr>
                 }
             </table>
         </div>
     </div>
 </body>
+
+@section Scripts{
+<script type="text/javascript">
+    @*$(document).ready(function () {
+        $("#form").on("change", function () {
+            $.ajax({
+                type: "Get",
+                url: "/User/Getreport",
+                data: "json",
+                success: function (response) {
+                    for (i in response.data) {
+                        console.log(response.data[i]);
+                    }
+                }
+            })
+        })
+    })*@
+ 
+</script>
+}

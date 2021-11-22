@@ -15,18 +15,18 @@
                         <div class="user-details">
                             <div class="input-box">
                                 <span class="details">Full Name</span>
-                                <input type="text" placeholder="Enter your name" asp-for="Name" id="name">
+                                <input type="text" placeholder="Enter your name" asp-for="Name" id="name" required>
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="input-box">
                                 <span class="details">Email</span>
                                 @*@Html.TextBoxFor(e => e.Email, new { id = "email" })*@
-                                <input type="text" placeholder="Enter your email" asp-for="Email" id="email">
+                                <input type="text" placeholder="Enter your email" asp-for="Email" id="email" required>
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="input-box">
                                 <span class="details">Category</span>
-                                <select id="category" asp-items="@ViewBag.category" asp-for="Catergory">
+                                <select id="category" asp-items="@ViewBag.category" asp-for="Catergory" required>
                                     <option  selected disabled>Select Category</option>
                                 </select>
                                 <span asp-validation-for="Catergory" class="text-danger"></span>
@@ -40,8 +40,9 @@
                             </div>
                             <div class="input-box">
                                 <span class="details">Return Date</span>
-                                <input id="returndate" asp-for="Returndate" onchange="date()" />
+                                <input id="returndate" asp-for="Returndate" onchange="date()" required />
                                 <span asp-validation-for="Returndate" class="text-danger"></span>
+                                <span id="status"></span>
                             </div>
                             <div class="input-box">
                                 <span class="details">Lended Date</span>
@@ -88,6 +89,19 @@
                     });
                 })
             });
+            function checkdt() {
+                var dd = new Date(document.getElementById("returndate").value).getTime();
+                var lenddate = Date.parse(new Date());
+                var ddt = new Date(lenddate).getTime();
+                if ((document.getElementById("returndate").value == null) || (dd + 86400000<= ddt)) {
+                    $("#status").html('<font color="Red"> Return date should to greater than or equal to Lended date')
+                    $("#submit").prop('disabled', true);
+                }
+                else {
+                    $("#status").html('<font color="Green"> Valid')
+                    $("#submit").prop('disabled', false);
+                }
+            }
             function date() {
                 var returndate = document.getElementById("returndate").value
                 var lenddate = Date.parse(new Date());
@@ -107,6 +121,7 @@
                     var result = 100 + Rate;
                     document.getElementById("cost").value = result;
                 }
+                checkdt()
             }
             function save() {
                 localStorage.setItem("uname", document.getElementById("name").value);
@@ -116,6 +131,8 @@
                 localStorage.setItem("urdate",document.getElementById("returndate").value);
                 localStorage.setItem("uldate", document.getElementById("ldate").value);
                 localStorage.setItem("ucost", document.getElementById("cost").value);
+                confirm('saved successfully');
+                window.location.reload();
             }
             window.onload = function () {
                 var name = localStorage.getItem("uname");
@@ -132,9 +149,10 @@
                 if (rdate !== null) document.getElementById("returndate").value = rdate;
                 if (ldate !== null) document.getElementById("ldate").value = ldate;
                 if (cost !== null) document.getElementById("cost").value = cost;  
-    }
-    function clearall() {
-        window.localStorage.clear();
+            }
+            function clearall() {
+                window.localStorage.clear();
+                submitcheck()
             }
             $(document).ready(function () {
                 $("#email").on("change", function () {
@@ -167,15 +185,6 @@
                                                             confirm('You can lend another book only after your return date')
                                                             window.location.reload();
                                                         }
-                                                       @* else {
-                                                            $("#category").prop('disabled', false);
-                                                            $("#book").prop('disabled', false);
-                                                            $("#returndate").prop('disabled', false);
-                                                            $("#ldate").prop('disabled', false);
-                                                            $("#cost").prop('disabled', false);
-                                                            $("#submit").prop('disabled', false);
-                                                            $("#save").prop('disabled', false);
-                                                        }*@
                                                     }
                                                 }
                                             }

@@ -34,7 +34,7 @@
             content: '';
             height: 3px;
             width: 0;
-            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            background: linear-gradient(135deg, #d53369, #cbab6b);
             position: absolute;
             right: 0;
             bottom: -10px;
@@ -73,9 +73,9 @@
     margin: 20px;
     border-radius: 25px;
     font-weight: bold;
-    border: 2px solid linear-gradient(135deg, #71b7e6, #9b59b6);
-    border-color: linear-gradient(135deg, #71b7e6, #9b59b6);
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    border: 2px solid linear-gradient(135deg, #d53369, #cbab6b);
+    border-color: linear-gradient(135deg, #d53369, #cbab6b);
+    background: linear-gradient(135deg, #d53369, #cbab6b);
     color: white;
     cursor: pointer;
     position: relative;
