@@ -112,6 +112,19 @@ namespace MvcbkLending.Controllers
             List<UserTable> users = _context.UserTables.ToList<UserTable>();
             return Json(new { data = users }, new Newtonsoft.Json.JsonSerializerSettings());
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var users = new UserTable();
+            HttpClient cli = _api.Initial();
+            HttpResponseMessage result = await cli.GetAsync($"api/UserTables/{id}");
+            if (result.IsSuccessStatusCode)
+            {
+                var res = result.Content.ReadAsStringAsync().Result;
+                users = JsonConvert.DeserializeObject<UserTable>(res);
+            }
+            return View(users);
+        }
     }
 }
 

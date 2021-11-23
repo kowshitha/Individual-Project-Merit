@@ -27,7 +27,7 @@
                             <div class="input-box">
                                 <span class="details">Category</span>
                                 <select id="category" asp-items="@ViewBag.category" asp-for="Catergory" required>
-                                    <option  selected disabled>Select Category</option>
+                                    <option selected disabled>Select Category</option>
                                 </select>
                                 <span asp-validation-for="Catergory" class="text-danger"></span>
                             </div>
@@ -39,14 +39,14 @@
                                 <span asp-validation-for="Bookname" class="text-danger"></span>
                             </div>
                             <div class="input-box">
+                                <span class="details">Lended Date</span>
+                                @Html.TextBox("Lendeddate", DateTime.Today.ToShortDateString(), new { id = "ldate", @readonly = "readonly" })
+                            </div>
+                            <div class="input-box">
                                 <span class="details">Return Date</span>
                                 <input id="returndate" asp-for="Returndate" onchange="date()" required />
                                 <span asp-validation-for="Returndate" class="text-danger"></span>
                                 <span id="status"></span>
-                            </div>
-                            <div class="input-box">
-                                <span class="details">Lended Date</span>
-                                @Html.TextBox("Lendeddate", DateTime.Today.ToShortDateString(), new { id = "ldate", @readonly = "readonly"})
                             </div>
                             <div class="input-box">
                                 <span class="details">Cost</span>
@@ -74,6 +74,7 @@
                         data: { "Cname": $("#category").val() },
                         success: function (response) {
                             var items = '';
+                            items = '<option value=" " selected disabled> Select book </option>'
                             $(response).each(function () {
                                 items += "<option value=" + this.text + ">" + this.text + "</option>";
 
@@ -93,7 +94,7 @@
                 var dd = new Date(document.getElementById("returndate").value).getTime();
                 var lenddate = Date.parse(new Date());
                 var ddt = new Date(lenddate).getTime();
-                if ((document.getElementById("returndate").value == null) || (dd + 86400000<= ddt)) {
+                if ((document.getElementById("returndate").value == null) || (dd + 86400000 <= ddt)) {
                     $("#status").html('<font color="Red"> Return date should to greater than or equal to Lended date')
                     $("#submit").prop('disabled', true);
                 }
@@ -152,7 +153,7 @@
             }
             function clearall() {
                 window.localStorage.clear();
-                submitcheck()
+                validateForm()
             }
             $(document).ready(function () {
                 $("#email").on("change", function () {
@@ -177,14 +178,14 @@
                                                         var cdt = new Date();
                                                         console.log("rdt", rdt.getTime());
                                                         console.log("cdt", cdt.getTime());
-                                                        if (rdt.getTime() >= cdt.getTime()) {
+                                                        if (rdt.getTime() + 86400000 >= cdt.getTime()) {
                                                             confirm('You can lend another book only after your return date')
                                                             window.location.reload();
                                                         }
-                                                        else if (rdt.getDate() == cdt.getDate()) {
+                                                        @*else if (rdt.getDate() == cdt.getDate()) {
                                                             confirm('You can lend another book only after your return date')
                                                             window.location.reload();
-                                                        }
+                                                        }*@
                                                     }
                                                 }
                                             }
@@ -198,6 +199,18 @@
                         }
                     });
                 })
-              })
+            })
+
+            function validateForm() {
+                var form = document.getElementById("userform").value
+                if (form == "") {
+                   @* alert("submitted successfully");
+                    return false;*@
+                }
+                else {
+                    alert("submitted successfully");
+                    return true;
+                }
+            }
         </script>
     }

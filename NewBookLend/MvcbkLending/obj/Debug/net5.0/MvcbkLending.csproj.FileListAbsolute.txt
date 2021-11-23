@@ -151,3 +151,4 @@ C:\Users\merit\source\repos\NewBookLend\MvcbkLending\obj\Debug\net5.0\MvcbkLendi
 C:\Users\merit\source\repos\NewBookLend\MvcbkLending\obj\Debug\net5.0\MvcbkLending.genruntimeconfig.cache
 C:\Users\merit\source\repos\NewBookLend\MvcbkLending\obj\Debug\net5.0\Razor\Views\User\Index.cshtml.g.cs
 C:\Users\merit\source\repos\NewBookLend\MvcbkLending\bin\Debug\net5.0\libman.json
+C:\Users\merit\source\repos\NewBookLend\MvcbkLending\obj\Debug\net5.0\Razor\Views\User\Details.cshtml.g.cs

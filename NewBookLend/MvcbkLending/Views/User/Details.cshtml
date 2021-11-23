@@ -1,0 +1,35 @@
+﻿@model MvcbkLending.Models.UserTable
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/shared/_Layout.cshtml";
+
+}
+
+<body style="background-color:antiquewhite">
+    <div class="row justify-content-center m-3">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1 style="color:indianred;font-family:'Times New Roman', Times, serif">@Html.DisplayFor(model => model.Bookreqno)</h1>
+
+                </div>
+                <div class="card-body text-center">
+                    <h4><img src="~/lib/Image/user.png" height="150" width="150" style="border-radius:100px;" /></h4>
+                    <h3 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Name: @Html.DisplayFor(model => model.Name)</h3>
+                    <h3 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Email: @Html.DisplayFor(model => model.Email)</h3>
+                    <h3 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Category: @Html.DisplayFor(model => model.Catergory)</h3>
+                    <h3 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Book Name: @Html.DisplayFor(model => model.Bookname)</h3>
+                    <h3 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Return Date: @Html.DisplayFor(model => model.Returndate)</h3>
+                    <h3 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Cost: @Html.DisplayFor(model => model.Cost)</h3>
+
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-controller="User" asp-action="Welcome" class="btn btn-danger">Back</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>

@@ -116,7 +116,7 @@ form .button{
 }
 form .button input {
     height: 100%;
-    width: 30%;
+    width: 25%;
     border-radius: 40px;
     border: none;
     color: #fff;
@@ -130,7 +130,7 @@ form .button input {
     box-shadow: 0 3px 10px rgb(0 0 0 / 50%);
 }
 #save {
-    width: 30%;
+    width: 25%;
     border-radius: 40px;
     border: none;
     color: #fff;
